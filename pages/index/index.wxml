@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<custom-nav title="AI图像生成" back="{{false}}" color="black" background="#FFF"></custom-nav>
+<custom-nav title="毒舌大师" back="{{false}}" color="black" background="#FFF"></custom-nav>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
     <view class="input-section">

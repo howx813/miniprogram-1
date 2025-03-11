@@ -6,6 +6,11 @@
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
   },
+  "request": {
+    "domainList": [
+      "api.coze.cn"
+    ]
+  },
   "style": "v2",
   "renderer": "skyline",
   "rendererOptions": {

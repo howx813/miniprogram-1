@@ -68,6 +68,7 @@ page {
 
 .result-image {
   width: 100%;
+  max-width: 100%;
   border-radius: 12rpx;
   box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.15);
 }

@@ -4,13 +4,7 @@ Page({
     inputText: '',
     imageUrl: '',
     isLoading: false,
-    // 演示用的示例图片URL（使用更可靠的图片服务）
-    demoImageUrls: [
-      'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=600&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=600&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=600&h=400&fit=crop'
-    ]
+    // 已移除演示图片配置
   },
 
   onInputChange(e) {
@@ -35,51 +29,52 @@ Page({
       imageUrl: ''
     });
 
-    // 模拟API调用延迟
-    setTimeout(() => {
-      // 随机选择一张演示图片
-      const randomIndex = Math.floor(Math.random() * this.data.demoImageUrls.length);
-      const randomImageUrl = this.data.demoImageUrls[randomIndex];
-      
-      // 更新状态，显示图片
-      this.setData({
-        imageUrl: randomImageUrl,
-        isLoading: false
-      });
-      
-      // 提示成功
-      wx.showToast({
-        title: '图片生成成功',
-        icon: 'success'
-      });
-      
-      // 注意：实际项目中，这里应该调用coze大模型API
-      // 示例代码（后续需要替换为实际API）:
-      /*
-      wx.request({
-        url: 'https://api.coze.com/generate-image',
+    // 调用coze大模型API
+    const data = {
+      parameters: {
+        input: this.data.inputText.trim()
+      },
+      workflow_id: '7480393467706540071'
+    };
+    console.log('请求参数:', data);
+    wx.request({
+        url: 'https://api.coze.cn/v1/workflow/run',
         method: 'POST',
+        header: {
+          'Authorization': 'Bearer pat_7ql5yqGT4wMYzWehAQfA8jMWWasvVSMMS6cEJk4x0DHgcOQcf6PKGMf5usl0rAHU',
+          'Content-Type': 'application/json'
+        },
         data: {
-          prompt: this.data.inputText
+          parameters: {
+            input: this.data.inputText.trim() // 修改参数名为input
+          },
+          workflow_id: '7480393467706540071'
         },
         success: (res) => {
-          this.setData({
-            imageUrl: res.data.imageUrl,
-            isLoading: false
-          });
+          console.log('完整API响应:', res);
+          try {
+            const responseData = JSON.parse(res.data.data);
+            if (res.data.code === 0 && responseData?.output) {
+              this.setData({
+                imageUrl: responseData.output,
+                isLoading: false
+              });
+              wx.showToast({ title: '生成成功', icon: 'success' });
+            } else {
+              throw new Error('API返回数据异常: ' + JSON.stringify(res.data));
+            }
+          } catch (error) {
+            console.error('数据处理失败:', error);
+            this.setData({ isLoading: false });
+            wx.showToast({ title: '生成失败，数据异常', icon: 'none' });
+          }
         },
         fail: (err) => {
-          console.error('API调用失败', err);
-          this.setData({
-            isLoading: false
-          });
-          wx.showToast({
-            title: '生成失败，请重试',
-            icon: 'none'
-          });
+          console.error('API调用失败', '错误详情:', err.errMsg, '状态码:', err.statusCode);
+          this.setData({ isLoading: false });
+          wx.showToast({ title: '生成失败，请重试', icon: 'none' });
         }
       });
-      */
-    }, 1500); // 模拟1.5秒的API延迟
+
   }
 })
