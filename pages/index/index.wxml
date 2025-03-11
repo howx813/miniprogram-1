@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<custom-nav title="AI图像生成" back="{{false}}" color="black" background="#FFF"></custom-nav>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="input-section">
+      <input class="text-input" placeholder="请输入描述文字" bindinput="onInputChange" value="{{inputText}}"/>
+      <button class="generate-btn" bindtap="generateImage" disabled="{{isLoading}}">
+        <text wx:if="{{!isLoading}}">生成图像</text>
+        <text wx:else>生成中...</text>
+      </button>
+    </view>
+    
+    <view class="image-section" wx:if="{{imageUrl}}">
+      <image class="result-image" src="{{imageUrl}}" mode="widthFix"></image>
+    </view>
+    
+    <view class="loading-section" wx:if="{{isLoading}}">
+      <view class="loading-container">
+        <view class="loading-spinner"></view>
+        <view class="loading-text">正在生成图像...</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

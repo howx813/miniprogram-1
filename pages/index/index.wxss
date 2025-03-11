@@ -1,0 +1,108 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+  margin-top: 90px; /* 为导航栏预留空间 */
+}
+
+.container {
+  padding: 40rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30rpx;
+  gap: 30rpx;
+}
+
+.text-input {
+  height: 90rpx;
+  border: 1px solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 30rpx;
+  font-size: 30rpx;
+  margin-bottom: 0;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.text-input:focus {
+  border-color: #07c160;
+}
+
+.generate-btn {
+  height: 90rpx;
+  background-color: #07c160;
+  color: white;
+  font-size: 30rpx;
+  font-weight: 500;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 8rpx rgba(7, 193, 96, 0.2);
+  transition: all 0.3s;
+}
+
+.generate-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 4rpx rgba(7, 193, 96, 0.2);
+}
+
+.image-section {
+  margin-top: 50rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.result-image {
+  width: 100%;
+  border-radius: 12rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.15);
+}
+
+.loading-section {
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: center;
+  height: 100rpx;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.loading-spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid rgba(7, 193, 96, 0.3);
+  border-radius: 50%;
+  border-top-color: #07c160;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 30rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+}

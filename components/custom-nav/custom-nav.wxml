@@ -1,0 +1,15 @@
+<view class="custom-nav" style="height: {{statusBarHeight + navBarHeight}}px; background-color: {{background}};">
+  <view class="status-bar" style="height: {{statusBarHeight}}px;"></view>
+  <view class="nav-bar" style="height: {{navBarHeight}}px;">
+    <view class="nav-left" wx:if="{{back}}">
+      <view class="back-btn" bindtap="back">
+        <view class="back-icon"></view>
+      </view>
+    </view>
+    <view class="nav-center" style="color: {{color}};">
+      <view wx:if="{{loading}}" class="loading"></view>
+      <text>{{title}}</text>
+    </view>
+    <view class="nav-right" style="width: {{menuButtonInfo.width + (menuButtonInfo.margin || 8) * 2}}px;"></view>
+  </view>
+</view> 
